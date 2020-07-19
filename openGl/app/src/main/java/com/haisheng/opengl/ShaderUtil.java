@@ -49,6 +49,7 @@ public class ShaderUtil {
         if (shader!=0){
             //加载shader
             GLES20.glShaderSource(shader,source);
+            //编译shader
             GLES20.glCompileShader(shader);
             //编译shader
             int[] compile = new int[1];

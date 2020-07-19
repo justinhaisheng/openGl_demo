@@ -24,7 +24,10 @@ public class CustomRender implements GLSurfaceView.Renderer {
     private final float[] vertexData = {
             -1f, 0.0f,
             0.0f, 1.0f,
-            1f, 0.0f};
+            1f, 0.0f,
+            1f, 0.0f,
+            0.0f,-1.0f,
+            -1f, 0.0f};
 
     private int mProgram;
 
@@ -80,7 +83,7 @@ public class CustomRender implements GLSurfaceView.Renderer {
             //为顶点属性赋值：
             GLES20.glVertexAttribPointer(mPositionHandler, 2, GLES20.GL_FLOAT, false, 2*4, mVertexBuffer);
             //绘制三角形
-            GLES20.glDrawArrays(GLES20.GL_TRIANGLES,0,3);
+            GLES20.glDrawArrays(GLES20.GL_TRIANGLES,0,6);
         }
 
     }
