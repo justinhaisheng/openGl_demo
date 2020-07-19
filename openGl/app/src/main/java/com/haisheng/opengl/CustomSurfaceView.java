@@ -17,6 +17,10 @@ public class CustomSurfaceView extends GLSurfaceView {
     public CustomSurfaceView(Context context, AttributeSet attrs) {
         super(context, attrs);
         setEGLContextClientVersion(2);
-        setRenderer(new CustomRender(context));
+       // setRenderer(getRenderer());
     }
+
+//    private Renderer getRenderer() {
+//        return null;
+//    }
 }

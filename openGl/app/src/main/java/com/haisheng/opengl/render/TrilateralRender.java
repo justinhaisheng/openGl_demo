@@ -1,9 +1,12 @@
-package com.haisheng.opengl;
+package com.haisheng.opengl.render;
 
 import android.content.Context;
 import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
 import android.util.Log;
+
+import com.haisheng.opengl.R;
+import com.haisheng.opengl.ShaderUtil;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
@@ -17,26 +20,15 @@ import javax.microedition.khronos.opengles.GL10;
  * @创建时间 2020/7/13 17:02
  * @描述
  */
-public class CustomRender implements GLSurfaceView.Renderer {
+public class TrilateralRender implements GLSurfaceView.Renderer {
 
-    private static final String TAG = CustomRender.class.getSimpleName();
+    private static final String TAG = TrilateralRender.class.getSimpleName();
     //顶点坐标系
-//    private final float[] vertexData = {
-//            -1f, 0.0f,
-//            0.0f, 1.0f,
-//            1f, 0.0f,
-//            1f, 0.0f,
-//            0.0f,-1.0f,
-//            -1f, 0.0f};
-
-
-        private final float[] vertexData = {
+    private final float[] vertexData = {
             -1f, 0.0f,
             0.0f, 1.0f,
-            0.0f, -1f,
             1f, 0.0f,
-            };
-
+           };
 
 
     private int mProgram;
@@ -44,7 +36,7 @@ public class CustomRender implements GLSurfaceView.Renderer {
     private int mPositionHandler;
     private int mColorHandler;
 
-    public CustomRender(Context context){
+    public TrilateralRender(Context context){
        this.mContext = context;
         mProgram = 0;
        mVertexBuffer = ByteBuffer.allocateDirect(vertexData.length * 4) //float 占4个字节
@@ -61,7 +53,7 @@ public class CustomRender implements GLSurfaceView.Renderer {
     @Override
     public void onSurfaceCreated(GL10 gl, EGLConfig config) {
         Log.d(TAG,"onSurfaceCreated");
-        String vertexSource = ShaderUtil.readRawText(mContext,R.raw.vertex_shader);
+        String vertexSource = ShaderUtil.readRawText(mContext, R.raw.vertex_shader);
         String framentSource = ShaderUtil.readRawText(mContext,R.raw.fragment_shader);
         mProgram = ShaderUtil.createProgram(vertexSource, framentSource);
         if (mProgram >0){
@@ -93,7 +85,7 @@ public class CustomRender implements GLSurfaceView.Renderer {
             //为顶点属性赋值：
             GLES20.glVertexAttribPointer(mPositionHandler, 2, GLES20.GL_FLOAT, false, 2*4, mVertexBuffer);
             //绘制三角形
-            GLES20.glDrawArrays(GLES20.GL_TRIANGLE_STRIP,0,4);
+            GLES20.glDrawArrays(GLES20.GL_TRIANGLE_STRIP,0,3);
         }
 
     }
